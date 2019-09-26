@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+# This script runs the test.py script at a time interval that is set.
+#
+# Script requirements:
+# - the environment variable PROCESS_INTERVAL must be set.
+# - the Python package schedule must be imported.
+
+import os
+import time
+import schedule
+
+from scripts import file_ingest
+
+PROCESS_INTERVAL = int(os.environ.get('PROCESS_INTERVAL', 60))
+
+def start():
+    """Main function that runs every (x) seconds based on the schedule."""
+    file_ingest.main()
+
+
+if __name__ == "__main__":
+    schedule.every(PROCESS_INTERVAL).seconds.do(start)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
