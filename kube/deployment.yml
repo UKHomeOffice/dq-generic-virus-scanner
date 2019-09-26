@@ -13,9 +13,9 @@ spec:
       securityContext:
         fsGroup: 1000
       volumes:
-      - name: scannerr-volume
+      - name: scanner-volume
         persistentVolumeClaim:
-          claimName: nats-volume
+          claimName: scanner-volume
       containers:
 
       - name: dq-generic-virus-scanner
@@ -52,7 +52,7 @@ spec:
             value: "8080"
         volumeMounts:
         - name: scanner-volume
-          mountPath: /NATS
+          mountPath: /scanner
 
       - name: clamav-api
         image: quay.io/ukhomeofficedigital/clamav-rest
