@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: scanner-volume
+  annotations:
+    volume.beta.kubernetes.io/storage-class: gp2-encrypted
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .SCANNER_PVC_SIZE }}
